@@ -9,7 +9,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/dependency-review-action@v4
+      - name: before
+        if: always()
+        uses: actions/dependency-review-action@v4.3.3
+        with:
+          allow-licenses: (Apache-2.0 OR MIT)
+          fail-on-severity: critical
+      - name: after
+        if: always()
+        uses: actions/dependency-review-action@v4.3.4
         with:
           allow-licenses: (Apache-2.0 OR MIT)
           fail-on-severity: critical
